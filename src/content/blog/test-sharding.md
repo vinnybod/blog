@@ -1,6 +1,6 @@
 ---
 author: Vince Rose
-pubDatetime: 2025-01-21T16:00:00.000Z
+pubDatetime: 2025-01-20T16:00:00.000Z
 title: Bazel Test Sharding
 slug: bazel-test-sharding
 featured: true
