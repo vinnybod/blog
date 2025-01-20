@@ -114,4 +114,4 @@ Because of all of these factors, there can be a bit of trial and error to find t
 
 **Note**: It is up to test runners to integrate with Bazel's sharding feature. In this case, the runner [implemented in rules_jvm](https://github.com/bazel-contrib/rules_jvm/blob/main/java/src/com/github/bazel_contrib/contrib_rules_jvm/junit5/TestSharding.java) is already set up to handle sharding.
 
-The full code example can be found on my [GitHub](https://github.com/vinnybod/bazel-examples/test-sharding).
+The full code example can be found on my [GitHub](https://github.com/vinnybod/bazel-examples).
