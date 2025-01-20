@@ -1,18 +1,20 @@
 ---
 author: Vince Rose
-pubDatetime: 2024-01-01T16:00:00.000Z
+pubDatetime: 2025-01-21T16:00:00.000Z
 title: Bazel Test Sharding
 slug: bazel-test-sharding
 featured: true
-ogImage: https://user-images.githubusercontent.com/53733092/215771435-25408246-2309-4f8b-a781-1f3d93bdf0ec.png
+ogImage: ../../assets/images/test-sharding/og.png
 tags:
   - bazel
 description: How to use test sharding to speed up your Bazel builds.
 ---
 
-Bazel excels at speeding up build times. But what happens when a single task takes a long time to run? When that task is not cached, it can become a bottleneck for the build. With Bazel we have a few tools at our disposal to improve the build times. One of these tools is test sharding.
+Bazel excels at speeding up build times. But what happens when a single task takes a long time to run? When that task is not cached, it can become a bottleneck for the build.
 
-Test sharding splits up the test **cases** for a single test **target** into multiple shards. Each shard can then be run in parallel, reducing the overall test time.
+At $dayjob, I converted a large Java project to Bazel. The project had some integration test classes that had 25+ tests and would take 45+ minutes to fully run. Still being fairly new to Bazel, the only way I knew to speed this up was to break the test classes down to multiple smaller classes. This worked, but it was quite a bit of manual effort.
+
+I hadn't known at the time about a feature in Bazel called **test sharding**. Test sharding splits up the test **cases** for a single test **target** into multiple shards. Each shard can then be run in parallel, reducing the overall test time.
 
 Let's set up an example test that takes 5 minutes to run. In this example, we have 5 tests cases that each take 1 minute to run.
 
@@ -74,6 +76,7 @@ Executed 1 out of 1 test: 1 fails locally.
 ```
 
 Now, let's split this test into five shards. We can do this by adding the `shard_count` attribute to the `java_test` rule.
+The test cases within the target will be split into the number of shards specified. In this case, I split the test into 5 shards, since there are 5 test cases and each of them takes the same amount of time to run.
 
 ```python
 java_junit5_test(
@@ -97,7 +100,7 @@ java_junit5_test(
   Stats over 5 runs: max = 60.9s, min = 60.9s, avg = 60.9s, dev = 0.0s
 ```
 
-This is a very simplistic example, but it shows how test sharding can reduce the time it takes to run tests. We went from 5 minutes to 1 minutes by sharding the test into 5 shards.
+Our test now runs in 1 minute instead of 5 minutes. This is a very simplistic example, but it shows how test sharding can reduce the time it takes to run tests by increasing the parallelism.
 
 In a real world situation there some things to consider:
 * The number of shards should be equal to or less than the number of test cases
@@ -108,5 +111,7 @@ In a real world situation there some things to consider:
 Because of all of these factors, there can be a bit of trial and error to find the optimal number of shards for your tests. In situations where there are a lot of test cases, I like to take a sort of binary search approach to find the optimal number.
 
 ![Test Sharding](../../assets/images/TestShard-1.gif)
+
+**Note**: It is up to test runners to integrate with Bazel's sharding feature. In this case, the runner [implemented in rules_jvm](https://github.com/bazel-contrib/rules_jvm/blob/main/java/src/com/github/bazel_contrib/contrib_rules_jvm/junit5/TestSharding.java) is already set up to handle sharding.
 
 The full code example can be found on my [GitHub](https://github.com/vinnybod/bazel-examples/test-sharding).
