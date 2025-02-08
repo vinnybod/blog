@@ -103,10 +103,11 @@ java_junit5_test(
 Our test now runs in 1 minute instead of 5 minutes. This is a very simplistic example, but it shows how test sharding can reduce the time it takes to run tests by increasing the parallelism.
 
 In a real world situation there some things to consider:
-* The number of shards should be equal to or less than the number of test cases
-* There is overhead in running a `java_test` target
-* Test cases are likely to have variance in run time, so you may not see a linear reduction in time as you increase the number of shards
-* Keep an eye on the `min` time in the test results. If there are shards with a significantly lower time than the others, you may have too many shards
+
+- The number of shards should be equal to or less than the number of test cases
+- There is overhead in running a `java_test` target
+- Test cases are likely to have variance in run time, so you may not see a linear reduction in time as you increase the number of shards
+- Keep an eye on the `min` time in the test results. If there are shards with a significantly lower time than the others, you may have too many shards
 
 Because of all of these factors, there can be a bit of trial and error to find the optimal number of shards for your tests. In situations where there are a lot of test cases, I like to take a sort of binary search approach to find the optimal number.
 
