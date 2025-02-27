@@ -14,11 +14,13 @@ description: How to implement test filtering with ruff analyze graph.
 
 [ruff](https://github.com/astral-sh/ruff) has been an immensely useful tool for linting and formatting for a while now. I discovered recently that it also has a feature called `analyze graph` that can be used to build a dependency graph of all the python files in the project.
 
-I am sure there are a variety of use cases for this, but one that I find particularly interesting is filtering tests to get faster feedback loops during development.
+I am sure there are a variety of use cases for this, but one that I find particularly interesting is **filtering tests to get faster feedback loops** during development.
 
 When you have a large codebase, running the entire test suite can take a long time. If you can filter the tests to only run the ones that are affected by the changes you made, you can get faster feedback.
 
 For this example, I am going to use a [uv python project](https://github.com/vinnybod/blog-examples/tree/main/ruff-graph). It only has a few files and tests, but it should be enough to demonstrate the concept.
+
+## Traversing the graph
 
 First let's look at the `ruff analyze graph` command
 ```bash
@@ -47,7 +49,7 @@ warning: `ruff analyze graph` is experimental and may change without warning
 
 It returns a json object in the form of an adjacency list where the keys are the files and the values are the files that depend on them. Note the `--direction=dependents` flag. This is important because we want to know which files depend on the file we are changing. Without it, we would get the inverse.
 
-Now that we have this information, let's write a small script that outputs the transitive list of files that are impacted by an input list of files.
+Now that we have this information, let's write a small script that outputs the transitive list of test files that are impacted by an input list of files.
 
 ```python
 import subprocess
@@ -78,23 +80,6 @@ def get_dependency_graph():
 
 
 if __name__ == "__main__":
-    changed_files = sys.argv[1:]
-    impacted_files = get_downstream_dependents(get_dependency_graph(), changed_files)
-    print(
-        f"When {changed_files} changes, the downstream dependents are: {impacted_files}"
-    )
-```
-
-Here is an example invocation:
-```bash
-➜  uv run scripts/graph_analyzer.py src/lib_a.py
-When ['src/lib_a.py'] changes, the downstream dependents are: {'src/tests/test_lib_a.py', 'src/lib_a.py'}
-```
-
-This is good, but we really only care about the test files that are impacted once we've traversed the graph. Let's add a filter to only return the test files. The first argument is now the test directory.
-
-```python
-if __name__ == "__main__":
     test_dir = sys.argv[1]
     changed_files = sys.argv[2:]
     impacted_files = get_downstream_dependents(get_dependency_graph(), changed_files)
@@ -106,19 +91,20 @@ if __name__ == "__main__":
     print(f"Test files that are impacted by these changes are: {impacted_test_files}")
 ```
 
-We need to be able to get the list of changed files. This can be done with a simple git command. Let's just stick with diffing for files that have changed since the last commit.
+Here is an example invocation:
+```bash
+➜  uv run scripts/graph_analyzer.py src/tests src/lib_a.py
+When ['src/lib_a.py'] changes, the downstream dependents are: {'src/tests/test_lib_a.py', 'src/lib_a.py'}
+Test files that are impacted by these changes are: ['src/tests/test_lib_a.py']
+```
+
+## Getting the list of changed files
+
+We need to be able to get the list of changed files. This can be done with a git command. Let's just stick with diffing for files that have changed since the last commit.
 
 ```bash
 ➜  git diff --name-only --relative | cat
 src/lib_a.py
-```
-
-Let's combine these two commands to get the list of tests that are impacted by the changes we made.
-
-```bash
-➜  uv run scripts/graph_analyzer.py src/tests $(git diff --name-only --relative)
-When ['src/lib_a.py'] changes, the downstream dependents are: {'src/lib_a.py', 'src/tests/test_lib_a.py'}
-Test files that are impacted by these changes are: ['src/tests/test_lib_a.py']
 ```
 
 ## Putting it all together
@@ -153,7 +139,7 @@ OK
 
 ## Making it a bit more user friendly
 
-I just added a `Makefile` target to make the development experience a bit nicer.
+I added a `Makefile` target to make the development experience a bit nicer.
 Now you can just run `make run-tests` to run the tests that are impacted by the changes you made.
 
 ```Makefile
@@ -172,4 +158,4 @@ There are some limitations to the current implementation.
 * If non-python files are changed, they are not tracked in the graph
 * pytest fixtures are not easy to track via static analysis of imports. Special logic would be needed to look at `conftest.py` files and track which files should be run based on those changes
 
-I'd only recommend using this for local development. In CI, running the full test suite will give you the most confidence that your changes are correct.
+I'd only recommend using this for local development. In CI, running the full test suite will give you the most confidence that your changes are correct. The full example can be found [on Github](https://github.com/vinnybod/blog-examples/tree/main/ruff-graph).
