@@ -23,6 +23,7 @@ For this example, I am going to use a [uv python project](https://github.com/vin
 ## Traversing the graph
 
 First let's look at the `ruff analyze graph` command
+
 ```bash
 ➜  uv run ruff analyze graph --direction=dependents
 warning: `ruff analyze graph` is experimental and may change without warning
@@ -92,6 +93,7 @@ if __name__ == "__main__":
 ```
 
 Here is an example invocation:
+
 ```bash
 ➜  uv run scripts/graph_analyzer.py src/tests src/lib_a.py
 When ['src/lib_a.py'] changes, the downstream dependents are: {'src/tests/test_lib_a.py', 'src/lib_a.py'}
@@ -119,7 +121,6 @@ if __name__ == "__main__":
     impacted_test_files = [f for f in impacted_files if f.startswith(test_dir)]
     print(" ".join(impacted_test_files))
 ```
-
 
 ```bash
 ➜ uv run scripts/graph_analyzer.py src/tests $(git diff --name-only --relative) | xargs uv run python -m unittest
@@ -153,9 +154,10 @@ run-tests:
 So now, we have a command to run when developing locally that will only run a subset of tests based on the uncommitted changes. This can save a lot of time and give faster feedback.
 
 There are some limitations to the current implementation.
-* 3rd party dependencies are not tracked ([yet](https://github.com/astral-sh/ruff/issues/13431))
-* There are likely edge cases in the git diff that I haven't handled here such as when files get renamed
-* If non-python files are changed, they are not tracked in the graph
-* pytest fixtures are not easy to track via static analysis of imports. Special logic would be needed to look at `conftest.py` files and track which files should be run based on those changes
+
+- 3rd party dependencies are not tracked ([yet](https://github.com/astral-sh/ruff/issues/13431))
+- There are likely edge cases in the git diff that I haven't handled here such as when files get renamed
+- If non-python files are changed, they are not tracked in the graph
+- pytest fixtures are not easy to track via static analysis of imports. Special logic would be needed to look at `conftest.py` files and track which files should be run based on those changes
 
 I'd only recommend using this for local development. In CI, running the full test suite will give you the most confidence that your changes are correct. The full example can be found [on Github](https://github.com/vinnybod/blog-examples/tree/main/ruff-graph).
