@@ -14,7 +14,7 @@ description: How to override a remote maven jar with a local jar using rules_jvm
 
 There are times where you are working on a Bazel project that is pulling in dependencies via `rules_jvm_external` and you may want to override a jar with a locally built one. This is useful when you want to test a change in a dependency that is not yet published.
 
-Let's see this in action. The code for this example can be found [here](TODO).
+Let's see this in action. The code for this example can be found [here](https://github.com/vinnybod/blog-examples/tree/main/rules-jvm-external-override).
 This post assumes you already have a Bazel project set up with `rules_jvm_external`.
 
 ## Querying the Original Target
@@ -129,4 +129,4 @@ maven_install(
 )
 ```
 
-The full bzlmod and WORKSPACE examples can be found [here](TODO).
+The full bzlmod and WORKSPACE examples can be found [here](https://github.com/vinnybod/blog-examples/tree/main/rules-jvm-external-override).
