@@ -7,7 +7,7 @@ featured: true
 ogImage: ../../assets/images/test-sharding/og.png
 tags:
   - bazel
-description:
+description: To macro or not to macro
 ---
 
 "Let's just auto-generate targets," someone says. "It'll save us from writing boilerplate." Fast forward six months and your simple macro now has 35 attributes, handles edge cases you didn't know existed, and requires a PhD to configure properly.
