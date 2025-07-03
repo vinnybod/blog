@@ -7,12 +7,12 @@ featured: true
 ogImage: ../../assets/images/test-sharding/og.png
 tags:
   - bazel
-description: 
+description:
 ---
 
 "Let's just auto-generate targets," someone says. "It'll save us from writing boilerplate." Fast forward six months and your simple macro now has 35 attributes, handles edge cases you didn't know existed, and requires a PhD to configure properly.
 
-Recently I've been having a lot of conversations with [@Farid Zakaria](https://fzakaria.com/) about *Dumb Bazel*. Which really boils down to how much abstraction is too much abstraction? Does *DRY* (Don't Repeat Yourself) really apply to Bazel declarations?
+Recently I've been having a lot of conversations with [@Farid Zakaria](https://fzakaria.com/) about _Dumb Bazel_. Which really boils down to how much abstraction is too much abstraction? Does _DRY_ (Don't Repeat Yourself) really apply to Bazel declarations?
 
 Let's start with an open source macro and see how the macro grows in complexity over time. Then we can talk about the trade-offs.
 
@@ -77,7 +77,7 @@ java_test_suite(
 )
 ```
 
-**Note:** At *$DAYJOB* we have an automation set up that pulls JUnit `@Tag` annotations from the source code and generates the `per_test_args` dict automatically.
+**Note:** At _$DAYJOB_ we have an automation set up that pulls JUnit `@Tag` annotations from the source code and generates the `per_test_args` dict automatically.
 
 Let's add one more modification just to get the point across. The test suite assumes all tests end in `Test.java` but it turns out for "reasons" we need to also generate some tests for classes that end in `XYZ.java`. Okay no problem. Let's add a new attribute.
 
@@ -183,6 +183,6 @@ Yes, it's more verbose. Yes, there's more work for the developer. But:
 
 I'm not advocating for throwing away all macros. Some abstractions genuinely make sense - especially when you're encoding complex domain knowledge or company-specific patterns that would be error-prone to repeat.
 
-It might surprise you to hear that I just spent this entire blog post advocating for a position that *I* am not fully sold on. In this argument, I still lean towards the macro set up where developers rarely need to touch the `BUILD` files.
+It might surprise you to hear that I just spent this entire blog post advocating for a position that _I_ am not fully sold on. In this argument, I still lean towards the macro set up where developers rarely need to touch the `BUILD` files.
 
-**Why?** As an engineer working in Developer Productivity, my customers are the engineers working in the codebases. And what I hear from them is that they don't want to manage Bazel files. I am **more** sold on implementing the *Dumb Bazel* approach when its paired with more automation such as [Gazelle](https://github.com/bazel-contrib/bazel-gazelle).
+**Why?** As an engineer working in Developer Productivity, my customers are the engineers working in the codebases. And what I hear from them is that they don't want to manage Bazel files. I am **more** sold on implementing the _Dumb Bazel_ approach when its paired with more automation such as [Gazelle](https://github.com/bazel-contrib/bazel-gazelle).
