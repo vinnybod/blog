@@ -14,9 +14,9 @@ description: To macro or not to macro
 
 Recently I've been having a lot of conversations with [@Farid Zakaria](https://fzakaria.com/) about _Dumb Bazel_. For lack of a better name, its really about:
 
-* Could Bazel be *MORE* approchable with fewer macros?
-* Does _DRY_ (Don't Repeat Yourself) really apply to Bazel declarations?
-* how much abstraction is too much abstraction?
+- Could Bazel be _MORE_ approchable with fewer macros?
+- Does _DRY_ (Don't Repeat Yourself) really apply to Bazel declarations?
+- how much abstraction is too much abstraction?
 
 Let's start with an open source macro and see how the macro grows in complexity over time. Then we can talk about the trade-offs. This is a slimmed down example of some of the more complex macros that you might see in an enterprise setting.
 
