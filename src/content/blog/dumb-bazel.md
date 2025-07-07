@@ -43,7 +43,7 @@ Now let's see how this macro starts to grow in complexity.
 
 1. We have a test that inherits other classes which are also tests themselves. But our macro sorts the tests and non-tests. Each test is not "aware" of one another.
 
-Let's address this by adding a new attribute `additional_library_srcs`. This will tell the macro "this is a test, but you should also include it in the `java_library` for other tests.
+Let's address this by adding a new attribute `additional_library_srcs`. This will tell the macro "this is a test, but you should also include it in the `java_library` for other tests".
 
 ```py
 java_test_suite(
@@ -191,7 +191,7 @@ Yes, it's more verbose. Yes, there's more work for the developer. But:
 
 ## Finding the Balance
 
-I'm not advocating for throwing away all macros. Some abstractions genuinely make sense - especially when you're encoding complex domain knowledge or company-specific patterns that would be error-prone to repeat.
+I'm not advocating for throwing away all macros. Some abstractions genuinely make sense, especially when you're encoding complex domain knowledge or company-specific patterns that would be error-prone to repeat.
 
 It might surprise you to hear that I just spent this blog post advocating for a position that _I_ am not fully sold on. I still lean towards the macro set up where developers rarely need to touch the `BUILD` files.
 
