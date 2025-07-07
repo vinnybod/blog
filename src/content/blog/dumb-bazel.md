@@ -191,10 +191,10 @@ Yes, it's more verbose. Yes, there's more work for the developer. But:
 
 ## Finding the Balance
 
-I'm not advocating for throwing away all macros. Some abstractions genuinely make sense, especially when you're encoding complex domain knowledge or company-specific patterns that would be error-prone to repeat.
+I’m not advocating for throwing away all macros. Some abstractions genuinely make sense, especially when you’re encoding complex domain knowledge or company-specific patterns that would be error-prone to repeat.
 
-It might surprise you to hear that I just spent this blog post advocating for a position that _I_ am not fully sold on. I still lean towards the macro set up where developers rarely need to touch the `BUILD` files.
+This blog post illustrates the trade-offs: macros hide complexity but often introduce hidden costs, such as difficult debugging, reduced build avoidance, and weaker IDE support. On the other hand, explicit targets are transparent, precise, and easier for any developer to understand, at the cost of verbosity and extra boilerplate.
 
-**Why?** As an engineer working in Developer Productivity, my customers are the engineers working in the codebases. And what I hear from them is that **they do not want to manage Bazel files.**
+It might surprise you to hear that I just spent this blog post advocating for a position that _I_ am not fully sold on. I still lean towards the macro set up where developers rarely need to touch the `BUILD` files. **Why?** As an engineer working in Developer Productivity, my customers are the engineers working in the codebases. And what I hear from them is that **they do not want to manage Bazel files.**
 
-I am **more** sold on implementing the _Dumb Bazel_ approach when its paired with more automation such as [Gazelle](https://github.com/bazel-contrib/bazel-gazelle). But Gazelle has a few [limitations](https://github.com/bazel-contrib/rules_jvm/tree/main/java/gazelle#source-code-restrictions-and-limitations) that our codebases would need to address to use it.
+However, I am increasingly convinced that a balanced approach - explicit targets supported by robust automation tools like [Gazelle](https://github.com/bazel-contrib/bazel-gazelle) - could be ideal. Gazelle does come with [limitations](https://github.com/bazel-contrib/rules_jvm/tree/main/java/gazelle#source-code-restrictions-and-limitations), but addressing these might yield the best of both worlds: clear, explicit targets without burdening developers unnecessarily.
