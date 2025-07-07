@@ -16,7 +16,7 @@ Recently I've been having a lot of conversations with [@Farid Zakaria](https://f
 
 - Could Bazel be _MORE_ approchable with fewer macros?
 - Does _DRY_ (Don't Repeat Yourself) really apply to Bazel declarations?
-- how much abstraction is too much abstraction?
+- How much abstraction is too much abstraction?
 
 Let's start with an open source macro and see how the macro grows in complexity over time. Then we can talk about the trade-offs. This is a slimmed down example of some of the more complex macros that you might see in an enterprise setting.
 
@@ -85,7 +85,7 @@ java_test_suite(
 
 **Note:** At _$DAYJOB_ we have an automation set up that pulls JUnit `@Tag` annotations from the source code and generates the `per_test_args` dict automatically.
 
-3. The test suite assumes all tests end in `Test.java` but it turns out for "reasons" we need to also generate some tests for classes that end in `XYZ.java`.
+3. The test suite assumes all tests end in `Test.java`, but it turns out for "reasons" we need to also generate some tests for classes that end in `XYZ.java`.
 
 We can solve for this with a simple `test_suffixes` attribute.
 
