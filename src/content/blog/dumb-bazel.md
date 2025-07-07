@@ -1,6 +1,6 @@
 ---
 author: Vince Rose
-pubDatetime: 2025-07-07T16:00:00.000Z
+pubDatetime: 2025-07-06T16:00:00.000Z
 title: "Dumb Bazel"
 slug: dumb-bazel
 featured: true
