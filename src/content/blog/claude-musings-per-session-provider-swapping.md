@@ -48,7 +48,7 @@ And since I've been having issues with multi-line status lines disappearing in t
 
 ## Quirks
 
-There are some quirks to using the non-anthropic models with Claude such as `/voice` not being available and `WebSearch` not working. Swapping between providers mid-session also seems to just cause errors from the provider. I'm sure there's a ton more that I'll come across. I've really only used it for about an hour at this point. But, I can use my favorite skills without needing to switch tools and still get the familiarity of my preferred agent harness.
+There are some quirks to using the non-Anthropic models with Claude such as `/voice` not being available and `WebSearch` not working. Swapping between providers mid-session also seems to just cause errors from the provider. I'm sure there's a ton more that I'll come across. I've really only used it for about an hour at this point. But, I can use my favorite skills without needing to switch tools and still get the familiarity of my preferred agent harness.
 
 ---
 
