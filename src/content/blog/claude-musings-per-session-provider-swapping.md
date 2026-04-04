@@ -18,6 +18,7 @@ I have been seeing a bit of hype around GLM 5.1 and its impressive benchmarks. S
 I decided to just ask Claude to read through the z.ai docs on how to connect Claude Code to the GLM models. While this got us to a point where I could use GLM, the setup was [not ideal](https://docs.z.ai/devpack/tool/claude) because writing to `settings.json` impacts all sessions, or a local `settings.json` impacts all the sessions in that directory. I wanted something on a per-session basis. It turns out you can basically do the same thing with just environment variables. To make it a bit more convenient, I wrote a simple wrapper for my "z.ai claude"
 
 `~/.config/claude-providers/zai.env`:
+
 ```sh
 export ANTHROPIC_AUTH_TOKEN={z.ai api token}
 export ANTHROPIC_BASE_URL=https://api.z.ai/api/anthropic
@@ -28,6 +29,7 @@ export ANTHROPIC_DEFAULT_HAIKU_MODEL=glm-4.5-air
 ```
 
 `cz` script on path
+
 ```sh
 #!/bin/bash
 source ~/.config/claude-providers/zai.env
