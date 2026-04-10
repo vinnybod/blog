@@ -21,6 +21,7 @@ I recently saw a post from OpenAI about their [Claude Code Codex Plugin](https:/
 I asked Claude to go through the Codex plugin codebase and create a similar plugin for me using the `cz` command. I had it interview me about design choices. I determined `rescue` isn't really needed, but Claude suggested a new command `ask`, which I liked.
 
 So we ended up with
+
 - `/cz:review` - code review of the uncommitted changes in the repo
 - `/cz:adversarial-review` - the same, but with a hostile prompt designed to poke holes
 - `/cz:ask` - arbitrary questions, with context the main session decides is relevant
@@ -41,6 +42,7 @@ cz -p \
 
 Here's what it looks like in practice:
 ![](../../assets/images/second-opinion/review.png)
+
 > Running an adversarial-review on a plan document
 
 ## Using the Plugin to Review Itself
@@ -55,6 +57,7 @@ Once everything was working, the obvious next step was pointing the plugin at it
 4. Remove a brittle "two levels up" comment that referenced a path structure that could change.
 
 ![](../../assets/images/second-opinion/report.png)
+
 > Claude's assessment of the adverserial-review
 
 ---
