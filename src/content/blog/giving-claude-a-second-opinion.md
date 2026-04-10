@@ -39,7 +39,9 @@ cz -p \
   < /dev/null
 ```
 
+Here's what it looks like in practice:
 ![](../../assets/images/second-opinion/review.png)
+> Running an adversarial-review on a plan document
 
 ## Using the Plugin to Review Itself
 
@@ -53,10 +55,11 @@ Once everything was working, the obvious next step was pointing the plugin at it
 4. Remove a brittle "two levels up" comment that referenced a path structure that could change.
 
 ![](../../assets/images/second-opinion/report.png)
+> Claude's assessment of the adverserial-review
 
 ---
 
-If you want to see the code, it is at [vinnybod/blog-examples](todo). But be warned it's plenty buggy and not reviewed by a human. But it was a fun exercise in building a plugin with Claude.
+If you want to see the code, it is at [vinnybod/blog-examples](https://github.com/vinnybod/blog-examples/tree/main/claude-musings/cz-delegation-plugin). But be warned it's plenty buggy and not reviewed by a human. But it was a fun exercise in building a plugin with Claude.
 
 ## Where This Is All Headed
 
