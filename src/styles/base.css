@@ -38,9 +38,6 @@
   .prose a {
     @apply break-words hover:!text-accent;
   }
-  .prose code {
-    color: var(--foreground);
-  }
   .prose thead th:first-child,
   tbody td:first-child,
   tfoot td:first-child {
@@ -106,6 +103,11 @@
     font-weight: var(--shiki-dark-font-weight) !important;
     text-decoration: var(--shiki-dark-text-decoration) !important;
   }
+}
+
+/* Typography overrides (outside @layer to win specificity over plugin) */
+.prose code {
+  color: var(--foreground);
 }
 
 @utility display-none {
