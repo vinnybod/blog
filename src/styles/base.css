@@ -21,7 +21,10 @@
     @apply mx-auto max-w-3xl px-4;
   }
   a {
-    @apply outline-2 outline-offset-1 outline-accent focus-visible:no-underline focus-visible:outline-dashed;
+    @apply focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:no-underline focus-visible:outline-dashed;
+    &:focus-visible {
+      outline-color: var(--accent);
+    }
   }
   svg {
     @apply inline-block h-6 w-6 fill-foreground group-hover:fill-accent;
@@ -34,6 +37,9 @@
   }
   .prose a {
     @apply break-words hover:!text-accent;
+  }
+  .prose code {
+    color: var(--foreground);
   }
   .prose thead th:first-child,
   tbody td:first-child,

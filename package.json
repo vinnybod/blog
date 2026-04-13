@@ -23,6 +23,7 @@
     "remark-collapse": "^0.1.2",
     "remark-toc": "^9.0.0",
     "satori": "^0.26.0",
+    "sharp": "^0.34.5",
     "tailwindcss": "^4.2.2"
   },
   "devDependencies": {
@@ -46,5 +47,11 @@
     "react-dom": "^19.2.5",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp"
+    ]
   }
 }
