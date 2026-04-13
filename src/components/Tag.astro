@@ -29,10 +29,19 @@ const { tag, size = "sm" } = Astro.props;
 </li>
 
 <style>
+  @reference "tailwindcss";
   a {
-    @apply relative underline decoration-dashed hover:-top-0.5 hover:text-skin-accent focus-visible:p-1;
+    @apply relative underline decoration-dashed focus-visible:p-1;
+    &:hover {
+      top: -0.125rem;
+      color: var(--accent);
+    }
   }
   a svg {
-    @apply -mr-5 h-6 w-6 scale-95 text-skin-base opacity-80 group-hover:fill-skin-accent;
+    @apply -mr-5 h-6 w-6 scale-95 opacity-80;
+    color: var(--foreground);
+  }
+  :global(.group):hover a svg {
+    fill: var(--accent);
   }
 </style>

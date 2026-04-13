@@ -50,7 +50,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       <!-- <p>
         Read the blog posts or check
         <LinkButton
-          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
+          className="underline decoration-dashed underline-offset-4 hover:text-accent"
           href="https://github.com/satnaing/astro-paper#readme"
         >
           README
@@ -75,9 +75,9 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <section id="featured">
             <h2>Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, slug }) => (
+              {featuredPosts.map(({ data, id }) => (
                 <Card
-                  href={`/posts/${slug}/`}
+                  href={`/posts/${id}/`}
                   frontmatter={data}
                   secHeading={false}
                 />
@@ -95,10 +95,10 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <h2>Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, slug }, index) =>
+              ({ data, id }, index) =>
                 index < SITE.postPerIndex && (
                   <Card
-                    href={`/posts/${slug}/`}
+                    href={`/posts/${id}/`}
                     frontmatter={data}
                     secHeading={false}
                   />
@@ -125,6 +125,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 </Layout>
 
 <style>
+  @reference "tailwindcss";
   /* ===== Hero Section ===== */
   #hero {
     @apply pb-6 pt-8;
@@ -136,7 +137,8 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     @apply mb-6;
   }
   #hero .rss-icon {
-    @apply mb-2 h-6 w-6 scale-110 fill-skin-accent sm:mb-3 sm:scale-125;
+    @apply mb-2 h-6 w-6 scale-110 sm:mb-3 sm:scale-125;
+    fill: var(--accent);
   }
   #hero p {
     @apply my-2;
