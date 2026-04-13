@@ -115,10 +115,9 @@
 }
 
 @utility focus-outline {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
   &:focus-visible {
+    outline: 2px dashed var(--accent);
+    outline-offset: 1px;
     text-decoration: none;
-    outline-style: dashed;
   }
 }
