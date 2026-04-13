@@ -9,10 +9,7 @@ import { SITE } from "./src/config";
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
-  integrations: [
-    react(),
-    sitemap(),
-  ],
+  integrations: [react(), sitemap()],
   markdown: {
     remarkPlugins: [
       remarkToc,
